@@ -68,9 +68,9 @@ const reducer = (state, action) => {
   ? null : action.payload
         }
         case TOGGLE_VISIBILITY:
-          return {...state}
+          return {...state, displayAllQuote: !state.displayAllQuote}
           default:
-            return state 
+            return state
   }
 }
 
@@ -81,7 +81,7 @@ const createQuote = ({ authorName, quoteText }) => {
     // 👇 use the helper function above to create a new quote
     // 👇 and dispatch it over to the reducer
     const newQuote = {id: getNextId(), authorName,quoteText,apocryphal:false}
-    dispatch ({ type: createQuote, payload:newQuote})
+    dispatch ({ type: CREATE_QUOTE, payload:newQuote})
   }
   const deleteQuote = id => {
     // 👇 implement
@@ -97,6 +97,7 @@ const createQuote = ({ authorName, quoteText }) => {
   }
   const toggleVisibility = () => {
     // 👇 implement
+    dispatch({type: TOGGLE_VISIBILITY})
   }
 
   return (
@@ -108,6 +109,8 @@ const createQuote = ({ authorName, quoteText }) => {
         editQuoteAuthenticity={editQuoteAuthenticity}
         setHighlightedQuote={setHighlightedQuote}
         deleteQuote={deleteQuote}
+        toggleVisibility={toggleVisibility}
+        displayAllQuotes={state.displayAllQuote}
       // 👇 lots of props are missing! Check the Quotes component
 
       />
